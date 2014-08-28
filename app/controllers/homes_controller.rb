@@ -3,4 +3,3 @@ class HomesController < ApplicationController
     @user = User.new
   end
 end
-

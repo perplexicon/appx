@@ -1,0 +1,7 @@
+<%= form_for(@source) do |form| %>
+  <%= form.text_field :feed_url, placeholder: "New Feed" %>
+  <%= form.submit "Add" %>
+<% end %>
+
+<h1>Latest Posts</h1>
+<%= render(@feed_entries) or render("no_sources") %>

@@ -1,0 +1,2 @@
+<h1>Latest Posts from <%= link_to @source.name, @source.url %></h1>
+<%= render @source.feed_entries.order(published_at: :desc) %>

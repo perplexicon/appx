@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
 
-  def timeline
+  def content_feed
     FeedEntry.where(user_id: id).order(created_at: :desc)
   end
 end

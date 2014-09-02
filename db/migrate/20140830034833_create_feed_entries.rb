@@ -6,8 +6,7 @@ class CreateFeedEntries < ActiveRecord::Migration
       t.string :url, null: false
       t.datetime :published_at, null: false
       t.string :guid, null: false
-      t.string :feed_name, null: false, index: true
-      t.string :feed_url, null: false
+      t.references :source, null: false, index: true
       t.references :user, null: false, index: true
 
       t.timestamps

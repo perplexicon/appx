@@ -11,8 +11,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'monban', '~> 0.1.1'
 gem 'monban-generators', '~> 0.0.4'
+gem 'feedjira', '~> 1.3.1'
 
 group :development do
   gem 'spring'
 end
-

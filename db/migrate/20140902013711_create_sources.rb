@@ -5,6 +5,7 @@ class CreateSources < ActiveRecord::Migration
       t.string :name, null: false
       t.string :url, null: false
       t.string :feed_url, null: false
+      t.time :last_modified, null: false
       t.references :user, null: false, index: true
 
       t.timestamps

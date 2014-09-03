@@ -1,3 +1,5 @@
 <%= div_for(feed_entry) do %>
-  <%= link_to feed_entry.name, feed_entry.url %> by <%= link_to feed_entry.source.name, feed_entry.source.url %>
+  <%= link_to feed_entry.name, feed_entry.url %> 
+  by <%= link_to feed_entry.source.name, feed_entry.source.url %>
+  posted <%= time_ago_in_words(feed_entry.published_at) %> ago
 <% end %>

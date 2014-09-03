@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(version: 20140902013711) do
   add_index "feed_entries", ["user_id"], name: "index_feed_entries_on_user_id", using: :btree
 
   create_table "sources", force: true do |t|
-    t.string   "etag",       null: false
-    t.string   "name",       null: false
-    t.string   "url",        null: false
-    t.string   "feed_url",   null: false
-    t.integer  "user_id",    null: false
+    t.string   "etag",          null: false
+    t.string   "name",          null: false
+    t.string   "url",           null: false
+    t.string   "feed_url",      null: false
+    t.time     "last_modified", null: false
+    t.integer  "user_id",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

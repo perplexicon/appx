@@ -6,7 +6,19 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
 
   def content_feed
-    FeedEntry.update_feed(self, self.sources)
-    FeedEntry.where(user_id: id).order(published_at: :desc).limit(10)
+    update_user_feed
+    show_user_feed
+  end
+
+  private
+
+  def update_user_feed
+    self.sources.each do |source|
+      FeedFactory.new(self, source.feed_url)
+    end
+  end
+
+  def show_user_feed
+    FeedEntry.where(user_id: id).order(published_at: :desc).limit(10) || []
   end
 end

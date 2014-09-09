@@ -4,9 +4,7 @@ class SourcesController < ApplicationController
   end
 
   def create
-    feed_url = source_params[:feed_url]
-    source = Source.update_list(current_user, feed_url)
-    FeedEntry.add_feed(current_user, source)
+    add_feed
     redirect_to dashboard_path
   end
 
@@ -15,6 +13,14 @@ class SourcesController < ApplicationController
   end
 
   private
+
+  def add_feed
+    FeedFactory.new(current_user, feed_url)
+  end
+
+  def feed_url
+    source_params[:feed_url]
+  end
 
   def source_params
     params.require(:source).permit(:feed_url)

@@ -1,5 +1,6 @@
 <%= div_for(feed_entry) do %>
   <%= link_to feed_entry.name, feed_entry.url %> 
   by <%= link_to feed_entry.source.name, feed_entry.source.url %>
-  posted <%= time_ago_in_words(feed_entry.published_at) %> ago
+  posted <%= feed_entry.published_at.to_s(:short) %>
+  [<%= link_to "X", feed_entry, method: :delete %>]
 <% end %>

@@ -12,6 +12,13 @@ class SourcesController < ApplicationController
     @source = Source.find(params[:id])
   end
 
+  def destroy
+    source = Source.find(params[:id])
+    source.feed_entries.destroy_all
+    source.destroy
+    redirect_to sources_path
+  end
+
   private
 
   def add_feed

@@ -1,3 +1,4 @@
 <%= div_for(source) do %>
   <%= link_to source.name, source %>
+  [<%= link_to "X", source, method: :delete %>]
 <% end %>

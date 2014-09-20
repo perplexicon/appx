@@ -1,9 +1,11 @@
 class FeedFactory
+  attr_reader :new_source
+
   def initialize(user, feed_url)
     @user = user
     feed = fetch_parse(feed_url)
     source = find_or_create_source(feed)
-
+    save_source(source)
     add_feed_entries(source, feed.entries)
   end
 
@@ -16,19 +18,26 @@ class FeedFactory
   def find_or_create_source(feed)
     @user.sources.
       create_with(source_params(feed)).
-      find_or_create_by!(name: feed.title)
+      find_or_initialize_by(name: feed.title)
+  end
+
+  def save_source(source)
+    @new_source = source.new_record?
+    source.save
   end
 
   def add_feed_entries(source, entries)
     entries.each do |entry|
-      @user.feed_entries.
-        create_with(feed_params(source, entry)).
-        find_or_create_by!(guid: entry.id)
+      if entry.published < source.last_modified
+        @user.feed_entries.
+          create(feed_params(source, entry))
+      end
     end
   end
 
   def source_params(feed)
     {
+      name: feed.title,
       etag: feed.etag,
       url: feed.url,
       feed_url: feed.feed_url,
@@ -43,6 +52,7 @@ class FeedFactory
       url: entry.url,
       published_at: entry.published,
       source_id: source.id,
+      guid: entry.id
     }
   end
 end

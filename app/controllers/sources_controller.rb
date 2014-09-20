@@ -4,7 +4,10 @@ class SourcesController < ApplicationController
   end
 
   def create
-    add_feed
+    feed = add_feed
+    unless feed.new_source
+      flash[:notice] = "Already Subscribed"
+    end
     redirect_to dashboard_path
   end
 

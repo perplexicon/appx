@@ -3,5 +3,9 @@
   <%= form.submit "Add" %>
 <% end %>
 
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
 <h1>Latest Posts</h1>
 <%= render(@feed_entries) or render("no_sources") %>

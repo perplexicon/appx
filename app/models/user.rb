@@ -19,6 +19,6 @@ class User < ActiveRecord::Base
   end
 
   def show_user_feed
-    FeedEntry.where(user_id: id).order(published_at: :desc).limit(10) || []
+    FeedEntry.where(user_id: id).order(published_at: :desc).limit(20) || []
   end
 end

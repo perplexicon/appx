@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :feed_entries
   has_many :sources
+  has_many :groups
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true

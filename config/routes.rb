@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create]
-  resources :sources, only: [:index, :create, :show, :destroy]
+  resources :groups, only: [:index, :show]
+  resources :sources, only: [:create, :show, :edit, :update, :destroy]
   resources :feed_entries, only: [:destroy]
 end

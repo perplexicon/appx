@@ -15,6 +15,16 @@ class SourcesController < ApplicationController
     @source = Source.find(params[:id])
   end
 
+  def edit
+    @source = Source.find(params[:id])
+  end
+
+  def update
+    @source = Source.find(params[:id])
+    @source.update(source_params)
+    redirect_to @source
+  end
+
   def destroy
     source = Source.find(params[:id])
     source.feed_entries.destroy_all
@@ -33,6 +43,6 @@ class SourcesController < ApplicationController
   end
 
   def source_params
-    params.require(:source).permit(:feed_url)
+    params.require(:source).permit(:feed_url, :group_id)
   end
 end

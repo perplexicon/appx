@@ -1,2 +1,11 @@
 <h1>Latest Posts from <%= link_to @source.name, @source.url %></h1>
+
+<% if @source.group_id %>
+  <p>Categorized under: <%= @source.group.name %>
+<% else %>
+  <p>Uncategorized
+<% end %>
+
+<%= link_to "Edit", edit_source_path(@source) %></p>
+
 <%= render @source.feed_entries.order(published_at: :desc) %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920080702) do
+ActiveRecord::Schema.define(version: 20140924035409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,16 +40,25 @@ ActiveRecord::Schema.define(version: 20140920080702) do
   add_index "feed_entries", ["source_id"], name: "index_feed_entries_on_source_id", using: :btree
   add_index "feed_entries", ["user_id"], name: "index_feed_entries_on_user_id", using: :btree
 
+  create_table "groups", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
   create_table "sources", force: true do |t|
-    t.string   "etag",                      null: false
-    t.string   "name",                      null: false
-    t.string   "url",                       null: false
-    t.string   "feed_url",                  null: false
-    t.time     "last_modified",             null: false
-    t.integer  "user_id",                   null: false
+    t.string   "etag",          null: false
+    t.string   "name",          null: false
+    t.string   "url",           null: false
+    t.string   "feed_url",      null: false
+    t.time     "last_modified", null: false
+    t.integer  "user_id",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "group_id",      default: 1
+    t.integer  "group_id"
   end
 
   add_index "sources", ["user_id"], name: "index_sources_on_user_id", using: :btree

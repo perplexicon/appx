@@ -1,0 +1,9 @@
+<h1>Edit <%= @source.name %></h1>
+
+<%= form_for(@source) do |form| %>
+  <% current_user.groups.each do |group| %>
+    <%= form.radio_button :group_id, group.id %>
+    <%= form.label group.name %>
+  <% end %>
+  <%= form.submit "Update" %>
+<% end %>

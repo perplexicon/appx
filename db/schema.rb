@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902013711) do
+ActiveRecord::Schema.define(version: 20140920080702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["user_id"], name: "index_categories_on_user_id", using: :btree
 
   create_table "feed_entries", force: true do |t|
     t.string   "name"
@@ -32,14 +41,15 @@ ActiveRecord::Schema.define(version: 20140902013711) do
   add_index "feed_entries", ["user_id"], name: "index_feed_entries_on_user_id", using: :btree
 
   create_table "sources", force: true do |t|
-    t.string   "etag",          null: false
-    t.string   "name",          null: false
-    t.string   "url",           null: false
-    t.string   "feed_url",      null: false
-    t.time     "last_modified", null: false
-    t.integer  "user_id",       null: false
+    t.string   "etag",                      null: false
+    t.string   "name",                      null: false
+    t.string   "url",                       null: false
+    t.string   "feed_url",                  null: false
+    t.time     "last_modified",             null: false
+    t.integer  "user_id",                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id",      default: 1
   end
 
   add_index "sources", ["user_id"], name: "index_sources_on_user_id", using: :btree

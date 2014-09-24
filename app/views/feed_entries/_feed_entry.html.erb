@@ -1,6 +1,7 @@
 <%= div_for(feed_entry) do %>
   <%= link_to feed_entry.name, feed_entry.url %> 
   by <%= link_to feed_entry.source.name, feed_entry.source.url %>
-  posted <%= feed_entry.published_at.to_s(:short) %>
+  posted <%= feed_entry.published_at %>
   [<%= link_to "X", feed_entry, method: :delete %>]
+  <%= feed_entry.source.updated_at %>
 <% end %>

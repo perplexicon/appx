@@ -28,11 +28,12 @@ class FeedFactory
 
   def add_feed_entries(source, entries)
     entries.each do |entry|
-      if entry.published < source.last_modified
+      if entry.published > source.updated_at || @new_source
         @user.feed_entries.
           create(feed_params(source, entry))
       end
     end
+    source.update(last_modified: Time.now)
   end
 
   def source_params(feed)
@@ -41,7 +42,7 @@ class FeedFactory
       etag: feed.etag,
       url: feed.url,
       feed_url: feed.feed_url,
-      last_modified: feed.last_modified
+      last_modified: Time.now
     } 
   end
 
